@@ -3,7 +3,7 @@
 
 #define TOFROM 6
 #define NUMSTEPS 10//�����ύX
-#define ZC 0.55//0.75~0.6 �Ƃ肠����
+#define ZC 0.7//0.55//0.75~0.6 �Ƃ肠����
 #define MAXZ 0.97
 #define WAITCOUNT 4000
 #define WAITTIME 4.0

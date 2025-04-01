@@ -89,6 +89,7 @@ items:
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
+          is_selected: true
           data:
             time_step: 0.001
             realtime_sync_mode: compensatory
@@ -102,7 +103,7 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
-            time_sync_items: [ 4 ]
+            time_sync_items: [ 4, 8 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: semi-implicit_euler
             gravity: [ 0, 0, -9.80665 ]
@@ -117,6 +118,30 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
+        -
+          id: 7
+          name: "Box_h"
+          plugin: Body
+          class: BodyItem
+          is_checked: true
+          data:
+            file: "../model/Box_h.body"
+            format: CHOREONOID-BODY
+            rootPosition: [ 0, 0, 1.4 ]
+            rootAttitude: [
+              1, 0, 0,
+              0, 1, 0,
+              0, 0, 1 ]
+            initialRootPosition: [ 0, 0, 1.4 ]
+            initialRootAttitude: [
+              1, 0, 0,
+              0, 1, 0,
+              0, 0, 1 ]
+            fix_root: false
+            collisionDetection: true
+            selfCollisionDetection: false
+            lock_location: false
+            scene_sensitive: true
 views:
   -
     id: 0
@@ -129,7 +154,7 @@ views:
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 3 ]
+      expanded: [ 1, 2, 3, 7 ]
   -
     id: 2
     plugin: Base
@@ -163,7 +188,7 @@ views:
           isCurrent: true
           eye: [ 7.20644, 3.60322, 2.04129 ]
           direction: [ -0.880451, -0.440225, -0.17609 ]
-          up: [ -0.1575, -0.0787499, 0.984374 ]
+          up: [ -0.1575, -0.0787498, 0.984374 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -287,6 +312,11 @@ Body:
         show_zmp: false
       -
         body_item: 5
+        show_cm: false
+        show_cm_projection: false
+        show_zmp: false
+      -
+        body_item: 7
         show_cm: false
         show_cm_projection: false
         show_zmp: false
