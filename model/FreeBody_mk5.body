@@ -1,0 +1,423 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: TestBody
+rootLink: BODY
+
+
+links:
+  -
+    name: BODY #ルートリンク　
+    translation: [0, 0, 1.05]
+    jointType: free #空間を自由に運動可能
+    centerOfMass: [0, 0, 0]
+    mass: 10.0
+    inertia: [
+      100000, 0, 0,
+      0, 100000, 0,
+      0, 0, 100000]
+    material: BODY
+    elements:
+      type: Shape
+      geometry:
+          type: Box
+          size: [ 0.3, 0.45, 0.3 ]
+      appearance: &BodyAppearance
+          material:
+            diffuseColor: [ 0, 0.6, 0 ]
+            specularColor: [ 0.2, 0.8, 0.2 ]
+            shininess: 0.6
+  -
+    name: RLEG_J0 #右股ヨー軸
+    parent: BODY
+    translation: [0, -0.1, -0.175] #ローカル座標系はリンクの中心に生成される
+    jointType: revolute
+    jointAxis: [0, 0, 1]
+    jointRange: [-90, 90]
+    jointId: 0
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+      0.1, 0, 0,
+      0, 0.1, 0,
+      0, 0, 0.1]
+    elements:
+     -
+      type: Shape
+      geometry:
+          type: Box
+          size: [ 0.05, 0.05, 0.05 ]
+      appearance: *BodyAppearance
+  -
+    name: RLEG_J1 #右股ロール軸
+    parent: RLEG_J0
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [1, 0, 0]
+    jointRange: [-90, 90]
+    jointId: 1
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+        0.1, 0, 0,
+        0, 0.1, 0,
+        0, 0, 0.1]
+    elements:
+      -
+        type: Shape
+        geometry:
+          type: Box
+          size: [0.05, 0.05, 0.05]
+        appearance: *BodyAppearance
+  -
+    name: RLEG_J2 #右股ピッチ軸
+    parent: RLEG_J1
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 2
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.2]
+        rotation: [1, 0, 0, 90]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.25
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.01]
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Cylinder
+                  height: 0.35
+                  radius: 0.025
+                appearance: *BodyAppearance
+  -
+    name: RLEG_J3 #右膝ピッチ軸
+    parent: RLEG_J2
+    translation: [0, 0, -0.4]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 3
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.2]
+        rotation: [1, 0, 0, 90]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.25
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.01]
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Cylinder
+                  height: 0.35
+                  radius: 0.025
+                appearance: *BodyAppearance
+  -
+    name: RLEG_J4 #右足首ピッチ軸
+    parent: RLEG_J3
+    translation: [0, 0, -0.4]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 4
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+        0.1, 0, 0,
+        0, 0.1, 0,
+        0, 0, 0.1]
+    elements:
+      -
+        type: Shape
+        geometry:
+          type: Box
+          size: [0.05, 0.05, 0.05]
+        appearance: *BodyAppearance
+  -
+    name: RLEG_J5 #右足首ロール軸
+    parent: RLEG_J4
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [1, 0, 0]
+    jointRange: [-90, 90]
+    jointId: 5
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.05]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.5
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.5]
+            material: FOOT
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Box
+                  size: [0.2, 0.15, 0.05]#足リンクの大きさ
+                appearance: *BodyAppearance
+  -
+    name: LLEG_J0 #左股ヨー軸
+    parent: BODY
+    translation: [0, 0.1, -0.175] #ローカル座標系はリンクの中心に生成される
+    jointType: revolute
+    jointAxis: [0, 0, 1]
+    jointRange: [-90, 90]
+    jointId: 6
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+      0.1, 0, 0,
+      0, 0.1, 0,
+      0, 0, 0.1]
+    elements:
+     -
+      type: Shape
+      geometry:
+          type: Box
+          size: [ 0.05, 0.05, 0.05 ]
+      appearance: *BodyAppearance
+  -
+    name: LLEG_J1 #左股ロール軸
+    parent: LLEG_J0
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [1, 0, 0]
+    jointRange: [-90, 90]
+    jointId: 7
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+        0.1, 0, 0,
+        0, 0.1, 0,
+        0, 0, 0.1]
+    elements:
+      -
+        type: Shape
+        geometry:
+          type: Box
+          size: [0.05, 0.05, 0.05]
+        appearance: *BodyAppearance
+  -
+    name: LLEG_J2 #左股ピッチ軸
+    parent: LLEG_J1
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 8
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.2]
+        rotation: [1, 0, 0, 90]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.25
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.01]
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Cylinder
+                  height: 0.35
+                  radius: 0.025
+                appearance: *BodyAppearance
+  -
+    name: LLEG_J3 #左膝ピッチ軸
+    parent: LLEG_J2
+    translation: [0, 0, -0.4]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 9
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.2]
+        rotation: [1, 0, 0, 90]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.25
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.01]
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Cylinder
+                  height: 0.35
+                  radius: 0.025
+                appearance: *BodyAppearance
+  -
+    name: LLEG_J4 #左足首ピッチ軸
+    parent: LLEG_J3
+    translation: [0, 0, -0.4]
+    jointType: revolute
+    jointAxis: [0, 1, 0]
+    jointRange: [-90, 90]
+    jointId: 10
+    centerOfMass: [0, 0, 0]
+    mass: 0.25
+    inertia: [
+        0.1, 0, 0,
+        0, 0.1, 0,
+        0, 0, 0.1]
+    elements:
+      -
+        type: Shape
+        geometry:
+          type: Box
+          size: [0.05, 0.05, 0.05]
+        appearance: *BodyAppearance
+  -
+    name: LLEG_J5 #左足首ロール軸
+    parent: LLEG_J4
+    translation: [0, 0, 0]
+    jointType: revolute
+    jointAxis: [1, 0, 0]
+    jointRange: [-90, 90]
+    jointId: 11
+    elements:
+      -
+        type: RigidBody
+        centerOfMass: [0, 0, 0]
+        mass: 0.25
+        inertia: [
+            0.1, 0, 0,
+            0, 0.1, 0,
+            0, 0, 0.1]
+        elements:
+          -
+            type: Shape
+            geometry:
+              type: Box
+              size: [0.05, 0.05, 0.05]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, 0, -0.05]
+        elements:
+          -
+            type: RigidBody
+            centerOfMass: [0, 0, 0]
+            mass: 0.5
+            inertia: [
+                0.1, 0, 0,
+                0, 0.1, 0,
+                0, 0, 0.5]
+            material: FOOT
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Box
+                  size: [0.2, 0.15, 0.05]
+                appearance: *BodyAppearance

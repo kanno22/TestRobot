@@ -1,0 +1,26 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+
+name: "Box_h"
+rootLink: base
+links:
+  -
+    name: base
+    jointType: free
+    translation: [ 0, 0, 1.4 ]
+    mass: 0.5
+    inertia: [
+      0.0071, 0,       0,
+      0,       0.0071, 0,
+      0,       0,      0.0008 ]
+    material: Box_h
+    elements:
+     Shape:
+      geometry:
+        type: Box
+        size: [ 0.1, 0.1, 0.4 ]
+        appearance: &BodyAppearance
+        material:
+          diffuseColor: [ 0.0, 0.0, 1.0 ]
+          specularColor: [ 0.2, 0.8, 0.2 ]
+          shininess: 0.6
